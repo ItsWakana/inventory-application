@@ -30,6 +30,7 @@ const getSynthList = asyncHandler( async (req, res, next) => {
     const synthesizers = await Synthesizer.find({})
             .populate('brand')
             .populate('synthType')
+            .sort({name: 1})
             .exec();
 
     res.render('synthesizers', {
@@ -38,7 +39,25 @@ const getSynthList = asyncHandler( async (req, res, next) => {
     });
 });
 
+const synthCreateGet = asyncHandler( async (req, res, next) => {
+
+    const [
+        allBrands,
+        allSynthTypes
+    ] = await Promise.all([
+        Brand.find({}).exec(),
+        SynthType.find({}).exec()
+    ]);
+
+    res.render("synth-form", {
+        title: "Sergio's Synthesizer Store", 
+        allBrands: allBrands,
+        allSynthTypes: allSynthTypes
+    })
+})
+
 module.exports = {
     index,
-    getSynthList
+    getSynthList,
+    synthCreateGet
 }

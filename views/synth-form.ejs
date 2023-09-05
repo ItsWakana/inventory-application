@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Add a Synth</h1>
+    <form action="/synthesizers/create" method="post">
+        <select name="brand" id="brand">
+            <% allBrands.map((brand) => { %>
+                <option value="<%= brand.name %>"><%= brand.name %></option>
+            <% }) %>
+        </select>
+    </form>
+  </body>
+</html>

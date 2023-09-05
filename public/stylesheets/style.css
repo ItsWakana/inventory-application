@@ -7,8 +7,22 @@ a {
   color: #00B7FF;
 }
 
-h1 {
+h1, p {
   color: white;
+}
+
+button a {
+  text-decoration: none;
+  color: white;
+}
+
+button {
+  background-color: #00A96E;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
 }
 
 .synth-list ul {
