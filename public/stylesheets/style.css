@@ -1,10 +1,14 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: rgb(204, 204, 204);
+  background-color: #181E2E;
 }
 
 a {
   color: #00B7FF;
+}
+
+h1 {
+  color: white;
 }
 
 .synth-list ul {
@@ -35,4 +39,32 @@ a {
   border: none;
   color: white;
   font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #222838;
+  color: white;
+  margin-top: 50px;
+}
+
+th, td {
+  padding: 20px;
+  text-align: left;
+  /* border-bottom: 1px solid #ddd; */
+}
+
+/* th {
+  background-color: #f2f2f2;
+} */
+
+tr:nth-child(even) {
+  background-color: #0E1424;
+}
+
+tr:hover {
+  background-color: #00A96E;
+  color: black;
 }
