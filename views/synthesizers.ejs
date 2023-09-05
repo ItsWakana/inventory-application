@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div class="synth-list">
+        <ul>
+            <% synthesizers.map((synth) => { %>
+                <li>
+                    <p><b><%= synth.name %></b></p>
+                    <div>
+                        <p><%= synth.brand.name %></p>
+                        <p><b>£<%= synth.price %></b></p>
+                        <p><i><%= synth.releaseYear %></i></p>
+                        <button class="cart-btn">Add to Cart</button>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+  </body>
+</html>

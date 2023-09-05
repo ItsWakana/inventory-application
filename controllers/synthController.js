@@ -27,8 +27,18 @@ const index = asyncHandler( async (req, res, next) => {
 
 const getSynthList = asyncHandler( async (req, res, next) => {
 
+    const synthesizers = await Synthesizer.find({})
+            .populate('brand')
+            .populate('synthType')
+            .exec();
+
+    res.render('synthesizers', {
+         synthesizers: synthesizers, 
+         title: "Sergio's Synthesizer Store", 
+    });
 });
 
 module.exports = {
-    index
+    index,
+    getSynthList
 }

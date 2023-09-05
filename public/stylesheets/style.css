@@ -1,8 +1,38 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgb(204, 204, 204);
 }
 
 a {
   color: #00B7FF;
+}
+
+.synth-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px 15px 0 15px;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.synth-list ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  background-color: rgb(229, 242, 245);
+  min-width: 170px;
+  border-radius: 6px;
+  padding: 15px;
+  flex: 1;
+}
+
+.cart-btn {
+  background-color: rgb(22, 92, 197);
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
 }
