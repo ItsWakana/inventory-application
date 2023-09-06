@@ -6,12 +6,43 @@
   </head>
   <body>
     <h1>Add a Synth</h1>
-    <form action="/synthesizers/create" method="post">
+    <form class="synth-form" action="/synthesizers/create" method="post">
+        <div>
+          <input id="synthName" name="synthName" type="text"
+          value="<%= synthesizer === undefined ? '' : synthesizer.name %>">
+          <label for="synthName">Name</label>
+        </div>
+        <div>
+          <input id="releaseYear" name="releaseYear" type="text"
+          value="<%= undefined === synthesizer ? '' : synthesizer.releaseYear %>">
+          <label for="releaseYear">Release Year</label>
+        </div>
+        <div>
+          <input id="price" name="price" type="number"
+          value="<%= undefined === synthesizer ? '' : synthesizer.price %>">
+          <label for="price">Price (£)</label>
+        </div>
+        <div>
+          <input id="stock" name="stock" type="number"
+          value="<%= undefined === synthesizer ? '' : synthesizer.stock %>">
+          <label for="stock">Stock</label>
+        </div>
+        <div>
+          <input id="url" name="url" type="text"
+          value="<%= undefined === synthesizer ? '' : synthesizer.url %>">
+          <label for="url">URL</label>
+        </div>
         <select name="brand" id="brand">
-            <% allBrands.map((brand) => { %>
-                <option value="<%= brand.name %>"><%= brand.name %></option>
+          <% allBrands.map((brand) => { %>
+            <option value="<%= brand._id %>"><%= brand.name %></option>
             <% }) %>
         </select>
+        <select name="synthType" id="synthType">
+          <% allSynthTypes.map((type) => { %>
+            <option value="<%= type._id %>"><%= type.name %></option>
+            <% }) %>
+        </select>
+        <button type="submit">Add Synth</button>
     </form>
   </body>
 </html>

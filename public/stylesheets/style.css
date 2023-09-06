@@ -1,4 +1,8 @@
 body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #181E2E;
 }
@@ -16,6 +20,10 @@ button a {
   color: white;
 }
 
+.table__wrapper > button,
+form button {
+  margin-top: 25px;
+}
 button {
   background-color: #00A96E;
   padding: 6px 12px;
@@ -55,13 +63,17 @@ button {
   font-weight: bold;
 }
 
-table {
+.table__wrapper {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  background-color: #222838;
   color: white;
   margin-top: 50px;
+}
+
+.table__wrapper table {
+  background-color: #222838;
+  width: 100%;
 }
 
 th, td {
@@ -81,4 +93,49 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #00A96E;
   color: black;
+}
+
+.synth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  min-width: 250px;
+  width: 50%;
+  gap: 10px;
+  padding: 20px;
+  background: #0E1424;
+  border-radius: 10px;
+}
+
+.synth-form div {
+  position: relative;
+}
+
+.synth-form label {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  color: grey;
+}
+
+input,
+textarea {
+    padding: 6px;
+    padding-top: 20px;
+    border-radius: 4px;
+}
+
+label {
+    transition: all 150ms ease-in-out;
+}
+
+input:focus + label,
+input:valid + label,
+textarea:focus + label,
+textarea:valid + label {
+    transform: translateY(-13px);
+    font-size: 0.7rem;
+
 }

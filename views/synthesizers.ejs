@@ -5,13 +5,14 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <table cellspacing="0">
+    <div class="table__wrapper">
+      <table cellspacing="0">
         <tr>
-            <th>Synthesizer</th>
-            <th>Brand</th>
-            <th>Price</th>
-            <th>Year</th>
-            <th>Stock</th>
+          <th>Synthesizer</th>
+          <th>Brand</th>
+          <th>Price</th>
+          <th>Year</th>
+          <th>Stock</th>
         </tr>
         <% synthesizers.map((synth) => { %>
             <tr>
@@ -20,9 +21,10 @@
                 <td>£<%= synth.price%></td>
                 <td><%= synth.releaseYear%></td>
                 <td><%= synth.stock%></td>
-            </tr>
-        <% }) %>
-    </table>
-    <button><a href="/synthesizers/create">Add Synthesizer</a></button>
+              </tr>
+              <% }) %>
+      </table>
+      <button><a href="/synthesizers/create">Add Synthesizer</a></button>
+    </div>
   </body>
 </html>

@@ -3,6 +3,7 @@ const Brand = require("../models/Brand");
 const SynthType = require("../models/SynthType");
 const mongoose = require("mongoose");
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 const index = asyncHandler( async (req, res, next) => {
 
@@ -52,12 +53,73 @@ const synthCreateGet = asyncHandler( async (req, res, next) => {
     res.render("synth-form", {
         title: "Sergio's Synthesizer Store", 
         allBrands: allBrands,
-        allSynthTypes: allSynthTypes
-    })
-})
+        allSynthTypes: allSynthTypes,
+        synthesizer: undefined,
+    });
+});
+
+const synthCreatePost = [
+
+    body("synthName", "synthName must not be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("releaseYear", "releaseYear must not be empty")
+        .trim()
+        .isLength({ min: 1})
+        .escape(),
+    body("price", "price must not be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("stock", "stock must not be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("url", "url must not be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    
+    
+    asyncHandler( async (req, res, next) => {
+        const errors = validationResult(req);
+
+        const synth = new Synthesizer({
+            name: req.body.synthName,
+            brand: req.body.brand,
+            synthType: req.body.synthType,
+            releaseYear: req.body.releaseYear,
+            price: req.body.price,
+            stock: req.body.stock,
+            url: req.body.url
+        });
+        if (!errors.isEmpty()) {
+
+            const [
+                allBrands,
+                allSynthTypes
+            ] = await Promise.all([
+                Brand.find({}).exec(),
+                SynthType.find({}).exec()
+            ]);
+
+            res.render("synth-form", {
+                title: "Sergio's Synthesizer Store", 
+                allBrands: allBrands,
+                allSynthTypes: allSynthTypes,
+                synthesizer: synth
+            });
+        } else {
+            synth.save();
+            res.redirect("/synthesizers");
+        }
+    }),
+]
 
 module.exports = {
     index,
     getSynthList,
-    synthCreateGet
+    synthCreateGet,
+    synthCreatePost
 }
