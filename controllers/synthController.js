@@ -40,6 +40,22 @@ const getSynthList = asyncHandler( async (req, res, next) => {
     });
 });
 
+
+const synthDetailGet = asyncHandler( async (req, res, next) => {
+    const id = req.params.synthId;
+
+    if (!mongoose.isValidObjectId(id)) {
+        res.redirect("/synthesizers");
+    }
+
+    const foundSynth = await Synthesizer.find({ _id: id });
+
+    if (!foundSynth) {
+        res.redirect("/synthesizers");
+    } 
+    res.send(foundSynth);
+});
+
 const synthCreateGet = asyncHandler( async (req, res, next) => {
 
     const [
@@ -54,7 +70,7 @@ const synthCreateGet = asyncHandler( async (req, res, next) => {
         title: "Sergio's Synthesizer Store", 
         allBrands: allBrands,
         allSynthTypes: allSynthTypes,
-        synthesizer: undefined,
+        synthesizer: null,
     });
 });
 
@@ -120,6 +136,7 @@ const synthCreatePost = [
 module.exports = {
     index,
     getSynthList,
+    synthDetailGet,
     synthCreateGet,
     synthCreatePost
 }

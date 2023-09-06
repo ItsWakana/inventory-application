@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="table__wrapper">
+      <table cellspacing="0">
+        <tr>
+          <th>Brand</th>
+          <th>Country</th>
+          <th>URL</th>
+        </tr>
+
+        <% allBrands.map((brand) => { %>
+
+            <tr>
+                <td><%= brand.name %></td>
+                <td><%= brand.countryOfOrigin %></td>
+                <td>
+                    <a href="<%= brand.url %>"><%= brand.url %></a>
+                </td>
+            </tr>
+        <% }) %>
+      </table>
+      <button><a href="/synthesizers/create">Add Brand</a></button>
+    </div>
+  </body>
+</html>

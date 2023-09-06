@@ -9,27 +9,27 @@
     <form class="synth-form" action="/synthesizers/create" method="post">
         <div>
           <input id="synthName" name="synthName" type="text"
-          value="<%= synthesizer === undefined ? '' : synthesizer.name %>">
+          value="<%= !synthesizer ? '' : synthesizer.name %>">
           <label for="synthName">Name</label>
         </div>
         <div>
           <input id="releaseYear" name="releaseYear" type="text"
-          value="<%= undefined === synthesizer ? '' : synthesizer.releaseYear %>">
+          value="<%= !synthesizer ? '' : synthesizer.releaseYear %>">
           <label for="releaseYear">Release Year</label>
         </div>
         <div>
           <input id="price" name="price" type="number"
-          value="<%= undefined === synthesizer ? '' : synthesizer.price %>">
+          value="<%= !synthesizer ? '' : synthesizer.price %>">
           <label for="price">Price (£)</label>
         </div>
         <div>
           <input id="stock" name="stock" type="number"
-          value="<%= undefined === synthesizer ? '' : synthesizer.stock %>">
+          value="<%= !synthesizer ? '' : synthesizer.stock %>">
           <label for="stock">Stock</label>
         </div>
         <div>
           <input id="url" name="url" type="text"
-          value="<%= undefined === synthesizer ? '' : synthesizer.url %>">
+          value="<%= !synthesizer ? '' : synthesizer.url %>">
           <label for="url">URL</label>
         </div>
         <select name="brand" id="brand">
