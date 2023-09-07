@@ -13,6 +13,7 @@
           <th>Price</th>
           <th>Year</th>
           <th>Stock</th>
+          <th>Remove</th>
         </tr>
         <% synthesizers.map((synth) => { %>
             <tr>
@@ -23,6 +24,7 @@
                 <td>£<%= synth.price%></td>
                 <td><%= synth.releaseYear%></td>
                 <td><%= synth.stock%></td>
+                <td><a href=""></a></td>
               </tr>
               <% }) %>
       </table>

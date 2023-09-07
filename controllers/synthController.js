@@ -226,11 +226,24 @@ const synthCreatePost = [
     }),
 ]
 
+const synthDeletePost = asyncHandler( async (req, res, next) => {
+    const id = req.params.synthId;
+
+    if (!mongoose.isValidObjectId(id)) {
+        res.redirect("/synthesizers");
+    }
+    await Synthesizer.findByIdAndRemove(id);
+
+    res.redirect("/synthesizers");
+
+})
+
 module.exports = {
     index,
     getSynthList,
     synthDetailGet,
     synthCreateGet,
     synthCreatePost,
-    synthUpdatePost
+    synthUpdatePost,
+    synthDeletePost
 }
