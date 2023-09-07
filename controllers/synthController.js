@@ -182,7 +182,14 @@ const synthCreatePost = [
         .trim()
         .isLength({ min: 1 })
         .escape(),
-    
+    body("brand", "brand must not be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("synthType", "synthType must not be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),    
     
     asyncHandler( async (req, res, next) => {
         const errors = validationResult(req);

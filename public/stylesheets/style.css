@@ -107,6 +107,14 @@ tr:hover {
   gap: 10px;
   background: #0E1424;
   border-radius: 10px;
+  border: solid 2px #232836;
+}
+
+.synth-form__select-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
 }
 
 .synth-form > div {
@@ -130,16 +138,18 @@ input,
 textarea {
     padding: 6px;
     padding-top: 20px;
+    padding-left: 10px;
     border-radius: 4px;
     background: none;
     border: none;
-    border-bottom: solid 2px #181E2E;
+    border-bottom: solid 2px #232836;
+    color: white;
 }
 
 select {
   background: none;
   border: none;
-  border: solid 2px #181E2E;
+  border: solid 2px #232836;
   color: grey;
   padding: 8px;
 }

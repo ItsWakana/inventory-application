@@ -32,18 +32,22 @@
           value="<%= synthesizer.url %>">
           <label for="url">URL</label>
         </div>
-        <select name="brand" id="brand">
+        <div class="synth-form__select-menu">
+          <select name="brand" id="brand">
+            <option value="">Select Brand</option>
             <% allBrands.map((brand) => { %>
               <option value="<%= brand._id %>" 
                 <%=synthesizer.brand._id.toString() === brand._id.toString() ? 'selected' : '' %>><%= brand.name%></option>
               <% }) %>
-        </select>
-        <select name="synthType" id="synthType">
-        <% allSynthTypes.map((type) => { %>
+          </select>
+          <select name="synthType" id="synthType">
+          <% allSynthTypes.map((type) => { %>
+            <option value="">Select Type</option>
             <option value="<%= type._id %>"
                 <%=synthesizer.synthType._id.toString() === type._id.toString() ? 'selected' : '' %>><%= type.name %></option>
             <% }) %>
-        </select>
+          </select>
+        </div>
         <button type="submit">Update Synth Info</button>
     </form>
   </body>
