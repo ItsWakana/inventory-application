@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Synthesizer Info</h1>
+    <form class="synth-form" action="/synthesizers/create" method="post">
+        <div>
+          <input id="synthName" name="synthName" type="text"
+          value="<%= synthesizer.name %>">
+          <label for="synthName">Name</label>
+        </div>
+        <div>
+          <input id="releaseYear" name="releaseYear" type="text"
+          value="<%= synthesizer.releaseYear %>">
+          <label for="releaseYear">Release Year</label>
+        </div>
+        <div>
+          <input id="price" name="price" type="number"
+          value="<%= synthesizer.price %>">
+          <label for="price">Price (£)</label>
+        </div>
+        <div>
+          <input id="stock" name="stock" type="number"
+          value="<%= synthesizer.stock %>">
+          <label for="stock">Stock</label>
+        </div>
+        <div>
+          <input id="url" name="url" type="text"
+          value="<%= synthesizer.url %>">
+          <label for="url">URL</label>
+        </div>
+        <select name="brand" id="brand">
+            <% allBrands.map((brand) => { %>
+              <option value="<%= brand._id %>" 
+                <%=synthesizer.brand._id.toString() === brand._id.toString() ? 'selected' : '' %>><%= brand.name%></option>
+              <% }) %>
+        </select>
+        <select name="synthType" id="synthType">
+        <% allSynthTypes.map((type) => { %>
+            <option value="<%= type._id %>"><%= type.name %></option>
+            <% }) %>
+        </select>
+        <button type="submit">Update Synth Info</button>
+    </form>
+  </body>
+</html>

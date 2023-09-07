@@ -16,7 +16,9 @@
         </tr>
         <% synthesizers.map((synth) => { %>
             <tr>
-                <td><%= synth.name%></td>
+                <td>
+                  <a href="/synthesizers/<%= synth._id %>"><%= synth.name%></a>
+                </td>
                 <td><%= synth.brand.name%></td>
                 <td>£<%= synth.price%></td>
                 <td><%= synth.releaseYear%></td>

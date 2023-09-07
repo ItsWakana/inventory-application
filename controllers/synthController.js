@@ -48,12 +48,40 @@ const synthDetailGet = asyncHandler( async (req, res, next) => {
         res.redirect("/synthesizers");
     }
 
-    const foundSynth = await Synthesizer.find({ _id: id });
+    // const [ foundSynth ] = await Synthesizer.find({ _id: id })
+    //     .populate("brand")
+    //     .populate("synthType");
+
+    const [
+        foundSynth,
+        allBrands,
+        allSynthTypes
+    ] = await Promise.all([
+        Synthesizer.findOne({ _id: id })
+            .populate("brand")
+            .populate("synthType")
+            .exec(),
+        Brand.find({}).exec(),
+        SynthType.find({}).exec()
+    ]);
 
     if (!foundSynth) {
         res.redirect("/synthesizers");
     } 
-    res.send(foundSynth);
+    // res.send([foundSynth, allBrands]);
+
+    // res.json(allBrands);
+
+    // "64f5fe7b26420cf7de0d7641"
+
+    res.render("synth-detail", {
+        title: "Sergio's Synthesizer Store", 
+        synthesizer: foundSynth,
+        allBrands: allBrands,
+        allSynthTypes: allSynthTypes
+    });
+
+    //in the detail render we can provide a form with all the fields filled out with what the user entered previously. We can include a update button the user can click to change the details of the synth.
 });
 
 const synthCreateGet = asyncHandler( async (req, res, next) => {
