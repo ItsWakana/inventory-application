@@ -6,6 +6,7 @@ const {
     synthCreateGet, 
     synthCreatePost,
     synthUpdatePost,
+    synthDeleteGet,
     synthDeletePost
 } = require("../controllers/synthController");
 
@@ -22,7 +23,9 @@ router.get("/brands", brandListGet);
 
 router.get("/:synthId/update", synthDetailGet);
 
-router.post("/:synthId/update", synthUpdatePost)
+router.post("/:synthId/update", synthUpdatePost);
+
+router.get("/:synthId/delete", synthDeleteGet);
 
 router.post("/:synthId/delete", synthDeletePost);
 

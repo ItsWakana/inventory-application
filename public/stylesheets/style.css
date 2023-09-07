@@ -33,6 +33,9 @@ button {
   font-weight: bold;
 }
 
+.delete-btn {
+  background-color: red;
+}
 .synth-list ul {
   display: flex;
   flex-wrap: wrap;
@@ -90,7 +93,7 @@ tr:nth-child(even) {
   background-color: #0E1424;
 }
 
-tr:hover {
+tr:not(#table__heading):hover {
   background-color: #00A96E;
   color: black;
 }
@@ -150,7 +153,8 @@ select {
   background: none;
   border: none;
   border: solid 2px #232836;
-  color: grey;
+  border-radius: 4px;
+  color: white;
   padding: 8px;
 }
 

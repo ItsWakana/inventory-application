@@ -134,8 +134,8 @@ body("url", "url must not be empty")
                 synthesizer: synth
             });
         } else {
-            // await Synthesizer.updateOne({_id: id}, synth)
-            // res.redirect("/synthesizers");
+            await Synthesizer.updateOne({_id: id}, synth)
+            res.redirect("/synthesizers");
         }
     }),
 
@@ -226,6 +226,25 @@ const synthCreatePost = [
     }),
 ]
 
+const synthDeleteGet = asyncHandler( async (req, res, next) => {
+
+    const id = req.params.synthId;
+
+    if (!mongoose.isValidObjectId(id)) {
+        res.redirect("/synthesizers");
+    }
+
+    const foundSynth = await Synthesizer.findById(id)
+        .populate("brand")
+        .populate("synthType")
+        .exec()
+
+    res.render("synth-delete", {
+        title: "Sergio's Synthesizer Store", 
+        synthesizer: foundSynth
+    });
+
+});
 const synthDeletePost = asyncHandler( async (req, res, next) => {
     const id = req.params.synthId;
 
@@ -236,7 +255,7 @@ const synthDeletePost = asyncHandler( async (req, res, next) => {
 
     res.redirect("/synthesizers");
 
-})
+});
 
 module.exports = {
     index,
@@ -245,5 +264,6 @@ module.exports = {
     synthCreateGet,
     synthCreatePost,
     synthUpdatePost,
+    synthDeleteGet,
     synthDeletePost
 }

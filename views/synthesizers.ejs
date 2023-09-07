@@ -7,7 +7,7 @@
   <body>
     <div class="table__wrapper">
       <table cellspacing="0">
-        <tr>
+        <tr id="table__heading">
           <th>Synthesizer</th>
           <th>Brand</th>
           <th>Price</th>
@@ -24,7 +24,9 @@
                 <td>£<%= synth.price%></td>
                 <td><%= synth.releaseYear%></td>
                 <td><%= synth.stock%></td>
-                <td><a href=""></a></td>
+                <td>
+                  <a href="/synthesizers/<%= synth._id %>/delete">Remove Item</a>
+                </td>
               </tr>
               <% }) %>
       </table>
