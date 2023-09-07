@@ -102,15 +102,21 @@ tr:hover {
   align-items: center;
   color: white;
   min-width: 250px;
+  padding: 20px 0;
   width: 50%;
   gap: 10px;
-  padding: 20px;
   background: #0E1424;
   border-radius: 10px;
 }
 
-.synth-form div {
+.synth-form > div {
   position: relative;
+  width: 50%;
+}
+
+.synth-form input {
+
+  width: 100%;
 }
 
 .synth-form label {
@@ -125,6 +131,27 @@ textarea {
     padding: 6px;
     padding-top: 20px;
     border-radius: 4px;
+    background: none;
+    border: none;
+    border-bottom: solid 2px #181E2E;
+}
+
+select {
+  background: none;
+  border: none;
+  border: solid 2px #181E2E;
+  color: grey;
+  padding: 8px;
+}
+
+select option {
+  background-color: #181E2E;
+  padding: 5px;
+}
+
+input:focus,
+select:focus {
+  outline: solid 2px #00A96E;
 }
 
 label {
