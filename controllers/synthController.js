@@ -68,11 +68,6 @@ const synthDetailGet = asyncHandler( async (req, res, next) => {
     if (!foundSynth) {
         res.redirect("/synthesizers");
     } 
-    // res.send([foundSynth, allBrands]);
-
-    // res.json(allBrands);
-
-    // "64f5fe7b26420cf7de0d7641"
 
     res.render("synth-detail", {
         title: "Sergio's Synthesizer Store", 
@@ -83,6 +78,69 @@ const synthDetailGet = asyncHandler( async (req, res, next) => {
 
     //in the detail render we can provide a form with all the fields filled out with what the user entered previously. We can include a update button the user can click to change the details of the synth.
 });
+
+const synthUpdatePost = [
+
+    body("synthName", "synthName must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+body("releaseYear", "releaseYear must not be empty")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+body("price", "price must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+body("stock", "stock must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+body("url", "url must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+    asyncHandler( async (req, res, next) => {
+        const errors = validationResult(req);
+
+        const id = req.params.synthId;
+
+        const synth = new Synthesizer({
+            name: req.body.synthName,
+            brand: req.body.brand,
+            synthType: req.body.synthType,
+            releaseYear: req.body.releaseYear,
+            price: req.body.price,
+            stock: req.body.stock,
+            url: req.body.url,
+            _id: id
+        });
+        if (!errors.isEmpty()) {
+
+            const [
+                allBrands,
+                allSynthTypes
+            ] = await Promise.all([
+                Brand.find({}).exec(),
+                SynthType.find({}).exec()
+            ]);
+
+            res.render("synth-form", {
+                title: "Sergio's Synthesizer Store", 
+                allBrands: allBrands,
+                allSynthTypes: allSynthTypes,
+                synthesizer: synth
+            });
+        } else {
+            // await Synthesizer.updateOne({_id: id}, synth)
+            // res.redirect("/synthesizers");
+        }
+    }),
+
+
+]
 
 const synthCreateGet = asyncHandler( async (req, res, next) => {
 
@@ -166,5 +224,6 @@ module.exports = {
     getSynthList,
     synthDetailGet,
     synthCreateGet,
-    synthCreatePost
+    synthCreatePost,
+    synthUpdatePost
 }

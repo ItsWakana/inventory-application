@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>Synthesizer Info</h1>
-    <form class="synth-form" action="/synthesizers/create" method="post">
+    <form class="synth-form" action="/synthesizers/<%=synthesizer._id%>/update" method="post">
         <div>
           <input id="synthName" name="synthName" type="text"
           value="<%= synthesizer.name %>">
@@ -40,7 +40,8 @@
         </select>
         <select name="synthType" id="synthType">
         <% allSynthTypes.map((type) => { %>
-            <option value="<%= type._id %>"><%= type.name %></option>
+            <option value="<%= type._id %>"
+                <%=synthesizer.synthType._id.toString() === type._id.toString() ? 'selected' : '' %>><%= type.name %></option>
             <% }) %>
         </select>
         <button type="submit">Update Synth Info</button>
