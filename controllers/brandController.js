@@ -54,6 +54,9 @@ const brandDeletePost = asyncHandler( async (req, res, next) => {
 
     if (allSynthsByBrand.length > 0) {
         res.send('THERE ARE SYNTHS THAT ALREADY EXIST WITH THIS BRAND')
+    } else {
+        await Brand.deleteOne(foundBrand);
+        res.redirect("/synthesizers/brands");
     }
 
 
