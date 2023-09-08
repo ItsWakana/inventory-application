@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%=brand.name%></h1>
+    <div class="table__wrapper">
+      <table cellspacing="0">
+        <tr>
+          <th>Synthesizer</th>
+          <th>Price</th>
+          <th>Year</th>
+          <th>Stock</th>
+        </tr>
+        <% synthesizers.map((synth) => { %>
+            <tr>
+                <td><%=synth.name%></td>
+                <td><%=synth.price%></td>
+                <td><%=synth.releaseYear%></td>
+                <td><%=synth.stock%></td>
+            </tr>
+        <% }) %>
+      </table>
+
+      <form action="/synthesizers/brands/<%=brand.name%>/delete" method="post">
+        <button class="delete-btn">Delete Brand</button>
+      </form>
+    </div>
+  </body>
+</html>

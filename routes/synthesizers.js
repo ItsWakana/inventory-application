@@ -10,7 +10,11 @@ const {
     synthDeletePost
 } = require("../controllers/synthController");
 
-const { brandListGet } = require("../controllers/brandController");
+const { 
+    brandListGet,
+    brandDetailGet,
+    brandDeletePost
+} = require("../controllers/brandController");
 
 router.get("/", getSynthList);
 
@@ -29,12 +33,13 @@ router.get("/:synthId/delete", synthDeleteGet);
 
 router.post("/:synthId/delete", synthDeletePost);
 
-// router.get("/:synthId/update");
-
 // we want to be able to have a seperate route that displays us the synthesizers by the brand name. f.ex /brand/exampleBrandName
 
 //BRANDS
 
+router.get("/brands/:brandName", brandDetailGet);
+
+router.post("/brands/:brandName/delete", brandDeletePost);
 
 // router.get("/brands/create");
 
