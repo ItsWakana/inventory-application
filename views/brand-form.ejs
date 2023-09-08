@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Add a Brand</h1>
+    <form class="synth-form" action="/synthesizers/brands/create" method="post">
+        <div>
+          <input id="brandName" name="brandName" type="text"
+          value="<%= !brand ? '' : brand.name %>">
+          <label for="synthName">Brand Name</label>
+        </div>
+        <div>
+          <input id="country" name="country" type="text"
+          value="<%= !brand ? '' : brand.countryOfOrigin %>">
+          <label for="releaseYear">Country</label>
+        </div>
+        <div>
+          <input id="url" name="url" type="text"
+          value="<%= !brand ? '' : brand.url %>">
+          <label for="url">URL</label>
+        </div>
+        <button type="submit">Add Brand</button>
+    </form>
+  </body>
+</html>

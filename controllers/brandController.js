@@ -2,6 +2,7 @@ const Brand = require("../models/Brand");
 const Synthesizer = require("../models/Synthesizer");
 const mongoose = require("mongoose");
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 const brandListGet = asyncHandler( async(req, res, next) => {
 
@@ -58,8 +59,64 @@ const brandDeletePost = asyncHandler( async (req, res, next) => {
 
 });
 
+const brandCreateGet = asyncHandler( async (req, res, next) => {
+
+    res.render("brand-form", {
+        title: "Sergio's Synthesizer Store",
+        brand: null
+    });
+});
+
+const brandCreatePost = [
+    body("brandName", "Name must not be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("country", "Country must not be empty")
+        .trim()
+        .isLength({ min: 1})
+        .escape(),
+    body("url")
+        .trim()
+        .isLength({ min: 1})
+        .escape(),
+
+    asyncHandler( async (req, res, next) => {
+        const {
+            brandName,
+            country,
+            url
+        } = req.body;
+
+        const errors = validationResult(req);
+
+        const brand = new Brand({
+            name: brandName,
+            countryOfOrigin: country,
+            url
+        });
+
+        if (!errors.isEmpty()) {
+
+            res.render("brand-form", {
+                title: "Sergio's Synthesizer Store",
+                brand
+            })
+        } else {
+            await brand.save();
+            res.redirect("/synthesizers/brands");
+        }
+
+
+
+        
+    })
+]
+
 module.exports = {
     brandListGet,
     brandDetailGet,
-    brandDeletePost
+    brandDeletePost,
+    brandCreateGet,
+    brandCreatePost
 }
