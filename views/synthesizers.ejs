@@ -25,7 +25,9 @@
                 <td><%= synth.releaseYear%></td>
                 <td><%= synth.stock%></td>
                 <td>
-                  <a href="/synthesizers/<%= synth._id %>/delete">Remove Item</a>
+                  <form action="/synthesizers/<%= synth._id %>/delete" method="post">
+                    <button class="delete-btn" type="submit">Remove Item</button>
+                  </form>
                 </td>
               </tr>
               <% }) %>
