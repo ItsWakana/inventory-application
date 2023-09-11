@@ -15,7 +15,9 @@ const {
     brandDetailGet,
     brandDeletePost,
     brandCreateGet,
-    brandCreatePost
+    brandCreatePost,
+    brandUpdateGet,
+    brandUpdatePost
 } = require("../controllers/brandController");
 
 router.get("/", getSynthList);
@@ -46,6 +48,10 @@ router.post("/brands/create", brandCreatePost);
 router.get("/brands/:brandName", brandDetailGet);
 
 router.post("/brands/:brandName/delete", brandDeletePost);
+
+router.get("/brands/:brandName/update", brandUpdateGet);
+
+router.post("/brands/:brandName/update", brandUpdatePost);
 
 
 

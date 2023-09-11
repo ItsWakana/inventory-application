@@ -16,7 +16,9 @@
         </tr>
         <% synthesizers.map((synth) => { %>
             <tr>
-                <td><%=synth.name%></td>
+                <td>
+                  <a href="/synthesizers/<%=synth._id %>/update"><%=synth.name%></a>
+                </td>
                 <td>£<%=synth.price%></td>
                 <td><%=synth.releaseYear%></td>
                 <td><%=synth.stock%></td>
@@ -27,6 +29,9 @@
       <form action="/synthesizers/brands/<%=brand.name%>/delete" method="post">
         <button class="delete-btn">Delete Brand</button>
       </form>
+      <button>
+        <a href="/synthesizers/brands/<%=brand.name%>/update">Edit Brand</a>
+      </button>
     </div>
   </body>
 </html>

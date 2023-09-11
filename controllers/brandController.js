@@ -34,7 +34,7 @@ const brandDetailGet = asyncHandler( async (req, res, next) => {
 
     const formattedBrand = {
         ...foundBrand.toObject(),
-        name: foundBrand.name[0].toUpperCase() + foundBrand.name.slice(1)
+        name: foundBrand.name,
     }
 
     const allSynthsByBrand = await Synthesizer.find({ brand: foundBrand._id }).exec();
@@ -123,10 +123,62 @@ const brandCreatePost = [
     })
 ]
 
+const brandUpdateGet = asyncHandler( async (req, res, next) => {
+
+    const brandName = req.params.brandName;
+
+    const foundBrand = await Brand.findOne({name: brandName}).exec()
+
+    res.render("brand-detail", {
+        title: "Sergio's Synthesizer Store",
+        brand: foundBrand
+    })
+});
+
+const brandUpdatePost = [
+    body("brandName", "name cannot be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("country", "country cannot be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body("url", "url cannot be empty")
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    
+    asyncHandler( async (req, res, next) => {
+
+        const {
+            brandName,
+            country,
+            url
+        } = req.body;
+
+        const errors = validationResult(req);
+
+        const brand = new Brand({
+
+            name: brandName,
+            countryOfOrigin: country,
+            url: url
+        });
+
+        if (!errors.isEmpty()) {
+
+
+        }
+    }),
+]
+
 module.exports = {
     brandListGet,
     brandDetailGet,
     brandDeletePost,
     brandCreateGet,
-    brandCreatePost
+    brandCreatePost,
+    brandUpdateGet,
+    brandUpdatePost
 }
