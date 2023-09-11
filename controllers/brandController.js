@@ -151,6 +151,7 @@ const brandUpdatePost = [
     
     asyncHandler( async (req, res, next) => {
 
+        const { brandId } = req.params;
         const {
             brandName,
             country,
@@ -161,14 +162,21 @@ const brandUpdatePost = [
 
         const brand = new Brand({
 
-            name: brandName,
-            countryOfOrigin: country,
-            url: url
+            name: brandName.toLowerCase(),
+            countryOfOrigin: country.toLowerCase(),
+            url: url,
+            _id: brandId,
         });
 
         if (!errors.isEmpty()) {
 
-
+            res.render("brand-detail", {
+                title: "Sergio's Synthesizer Store",
+                brand: brand
+            });
+        } else {
+            await Brand.updateOne({_id: brandId}, brand);
+            res.redirect("/synthesizers/brands");
         }
     }),
 ]

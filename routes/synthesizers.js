@@ -51,7 +51,7 @@ router.post("/brands/:brandName/delete", brandDeletePost);
 
 router.get("/brands/:brandName/update", brandUpdateGet);
 
-router.post("/brands/:brandName/update", brandUpdatePost);
+router.post("/brands/:brandId/update", brandUpdatePost);
 
 
 

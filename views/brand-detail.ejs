@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>Brand Info</h1>
-    <form class="synth-form" action="/synthesizers/brands/<%=brand.name%>/update" method="post">
+    <form class="synth-form" action="/synthesizers/brands/<%=brand._id%>/update" method="post">
         <div>
           <input id="brandName" name="brandName" type="text"
           value="<%= brand.name %>">
