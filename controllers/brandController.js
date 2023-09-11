@@ -3,6 +3,7 @@ const Synthesizer = require("../models/Synthesizer");
 const mongoose = require("mongoose");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const formatNames = require("../Helper Functions/formatNames");
 
 const brandListGet = asyncHandler( async(req, res, next) => {
 
@@ -10,9 +11,11 @@ const brandListGet = asyncHandler( async(req, res, next) => {
         .sort({ name: 1 })
         .exec();
 
+    const formattedBrands = formatNames(allBrands)
+
     res.render("brand-list", { 
         title: "Sergio's Synthesizer Store",
-        allBrands: allBrands
+        allBrands: formattedBrands
     });
 });
 
@@ -21,22 +24,24 @@ const brandDetailGet = asyncHandler( async (req, res, next) => {
     //render an individual brand page along with the list of all of the synthesizers that are under that brand.
 
     const { brandName } = req.params;
-
-    const formattedName = brandName[0].toUpperCase() + brandName.slice(1);
-
-    const foundBrand = await Brand.findOne({ name: formattedName }).exec();
-
+    const foundBrand = await Brand.findOne({ name: brandName }).exec();
+    
     if (!foundBrand) {
         const err = new Error("Brand not found");
         err.status = 404;
         return next(err);
     }
 
+    const formattedBrand = {
+        ...foundBrand.toObject(),
+        name: foundBrand.name[0].toUpperCase() + foundBrand.name.slice(1)
+    }
+
     const allSynthsByBrand = await Synthesizer.find({ brand: foundBrand._id }).exec();
 
     res.render("brand-page", {
         title: "Sergio's Synthesizer Store",
-        brand: foundBrand,
+        brand: formattedBrand,
         synthesizers: allSynthsByBrand        
     });
 });
@@ -47,8 +52,8 @@ const brandDeletePost = asyncHandler( async (req, res, next) => {
 
     const { brandName } = req.params;
 
-    const formattedName = brandName[0].toUpperCase() + brandName.slice(1);
-    const foundBrand = await Brand.findOne({ name: formattedName }).exec();
+    // const formattedName = brandName[0].toUpperCase() + brandName.slice(1);
+    const foundBrand = await Brand.findOne({ name: brandName }).exec();
 
     const allSynthsByBrand = await Synthesizer.find({ brand: foundBrand._id }).exec();
 
@@ -91,10 +96,12 @@ const brandCreatePost = [
             url
         } = req.body;
 
+        const nameToLowerCase = brandName.toLowerCase();
+
         const errors = validationResult(req);
 
         const brand = new Brand({
-            name: brandName,
+            name: nameToLowerCase,
             countryOfOrigin: country,
             url
         });

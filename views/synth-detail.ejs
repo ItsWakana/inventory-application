@@ -41,8 +41,8 @@
               <% }) %>
           </select>
           <select name="synthType" id="synthType">
-          <% allSynthTypes.map((type) => { %>
             <option value="">Select Type</option>
+          <% allSynthTypes.map((type) => { %>
             <option value="<%= type._id %>"
                 <%=synthesizer.synthType._id.toString() === type._id.toString() ? 'selected' : '' %>><%= type.name %></option>
             <% }) %>

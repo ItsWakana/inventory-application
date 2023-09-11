@@ -4,6 +4,7 @@ const SynthType = require("../models/SynthType");
 const mongoose = require("mongoose");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const formatNames = require("../Helper Functions/formatNames");
 
 const index = asyncHandler( async (req, res, next) => {
 
@@ -34,8 +35,26 @@ const getSynthList = asyncHandler( async (req, res, next) => {
             .sort({name: 1})
             .exec();
 
+    const formattedSynths = synthesizers.map((synth) => {
+
+        const formattedName = synth.name.split(' ').map((item) => item[0].toUpperCase() + item.slice(1)).join(' ');
+
+        const formattedBrandName = synth.brand.name.split(' ').map((item) => item[0].toUpperCase() + item.slice(1)).join(' ');
+
+        const formattedBrand = {
+            ...synth.brand.toObject(),
+            name: formattedBrandName
+        }
+
+        return {
+            ...synth.toObject(),
+            name: formattedName,
+            brand: formattedBrand
+        };
+    });
+
     res.render('synthesizers', {
-         synthesizers: synthesizers, 
+         synthesizers: formattedSynths, 
          title: "Sergio's Synthesizer Store", 
     });
 });
@@ -47,10 +66,6 @@ const synthDetailGet = asyncHandler( async (req, res, next) => {
     if (!mongoose.isValidObjectId(id)) {
         res.redirect("/synthesizers");
     }
-
-    // const [ foundSynth ] = await Synthesizer.find({ _id: id })
-    //     .populate("brand")
-    //     .populate("synthType");
 
     const [
         foundSynth,
@@ -69,10 +84,12 @@ const synthDetailGet = asyncHandler( async (req, res, next) => {
         res.redirect("/synthesizers");
     } 
 
+    const formattedBrands = formatNames(allBrands);
+
     res.render("synth-detail", {
         title: "Sergio's Synthesizer Store", 
         synthesizer: foundSynth,
-        allBrands: allBrands,
+        allBrands: formattedBrands,
         allSynthTypes: allSynthTypes
     });
 
